@@ -9,8 +9,8 @@ node: true,
 const { importFile } = require("../libs/import-file");
 
 const FILES = {
-  example: importFile("./day-template/input-example.txt"),
-  actual: importFile("./day-template/input-actual.txt"),
+  example: importFile("./day-01/input-example.txt"),
+  actual: importFile("./day-01/input-actual.txt"),
 };
 
 console.log(FILES.example);

@@ -8,7 +8,6 @@ node: true,
 
 const fs = require("fs");
 
-// TODO: use current directory rather than root
 function readFile(filename, encoding = "utf8") {
   try {
     const data = fs.readFileSync(filename, encoding);
@@ -27,4 +26,4 @@ function importFile(filename) {
   return splitByLines(readFile(filename));
 }
 
-module.exports = importFile;
+module.exports = { importFile };
