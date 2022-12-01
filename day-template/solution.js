@@ -13,7 +13,7 @@ const FILES = {
   actual: importFile("./day-template/input-actual.txt"),
 };
 
-console.log(FILES.example);
-console.log(FILES.actual);
+// console.log(FILES.example);
+// console.log(FILES.actual);
 
 module.exports = { FILES };
