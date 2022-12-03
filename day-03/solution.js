@@ -13,11 +13,10 @@ const FILES = {
   actual: importFile("./day-03/input-actual.txt"),
 };
 
-function identifySharedItem(rucksack) {
-  const firstHalf = rucksack.slice(0, rucksack.length / 2);
-  for (let i = rucksack.length / 2; i < rucksack.length; i++) {
-    if (firstHalf.includes(rucksack[i])) return rucksack[i];
-  }
+function identifySharedItem(sack) {
+  const inFirstHalf = new Set(sack.slice(0, sack.length / 2));
+  const inSecondHalf = new Set(sack.slice(sack.length / 2));
+  return [...inFirstHalf].filter((x) => inSecondHalf.has(x))[0];
 }
 
 function getPriority(itemType) {
@@ -33,30 +32,26 @@ function partOne(file) {
 }
 
 function partTwo(file) {
-  const input = [...file];
+  const elves = [...file];
   let elf;
   let group = [];
-  let badges = [];
-  while (typeof (elf = input.pop()) !== "undefined") {
-    // console.log(elf);
+  let sumOfPriorities = 0;
+  while (typeof (elf = elves.pop()) !== "undefined") {
     if (group.length < 3) {
       group.push(new Set(elf.split("")));
     }
     if (group.length === 3) {
       let [a, b, c] = group;
-      const intersection = new Set([...a].filter((x) => b.has(x) && c.has(x)));
-      // console.log(intersection);
-      const badge = Array.from(intersection)[0];
-      badges.push(badge);
+      const itemInCommon = [...a].filter((x) => b.has(x) && c.has(x))[0];
+      sumOfPriorities += getPriority(itemInCommon);
       group = [];
     }
   }
-
-  return badges.map((b) => getPriority(b)).reduce((a, b) => a + b);
+  return sumOfPriorities;
 }
 
-// console.log(partOne(FILES.example)); // 157
-// console.log(partOne(FILES.actual)); // 7763
+console.log(partOne(FILES.example)); // 157
+console.log(partOne(FILES.actual)); // 7763
 
 console.log(partTwo(FILES.example)); // 70
 console.log(partTwo(FILES.actual)); // 2569
