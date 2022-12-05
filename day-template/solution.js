@@ -9,13 +9,17 @@ node: true,
 const { importFile } = require("../libs/import-file");
 
 const FILES = {
-  example: importFile("./day-template/input-example.txt"),
-  actual: importFile("./day-template/input-actual.txt"),
+  example: importFile("./day-XX/input-example.txt"),
+  actual: importFile("./day-XX/input-actual.txt"),
 };
 
-function partOne(file) {}
+function partOne(file) {
+  return;
+}
 
-function partTwo(file) {}
+function partTwo(file) {
+  return;
+}
 
 console.log(partOne(FILES.example));
 // console.log(partOne(FILES.actual));
