@@ -13,17 +13,14 @@ const FILES = {
   actual: importFile("./day-template/input-actual.txt"),
 };
 
-// console.log(FILES.example);
-// console.log(FILES.actual);
-
 function partOne(file) {}
 
 function partTwo(file) {}
 
 console.log(partOne(FILES.example));
-console.log(partOne(FILES.actual));
+// console.log(partOne(FILES.actual));
 
 // console.log(partTwo(FILES.example));
 // console.log(partTwo(FILES.actual));
 
-module.exports = { FILES };
+module.exports = { FILES, partOne, partTwo };
