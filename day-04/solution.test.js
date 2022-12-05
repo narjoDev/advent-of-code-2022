@@ -40,3 +40,12 @@ describe("partOne", () => {
     expect(partOne(FILES.actual)).toStrictEqual(547);
   });
 });
+
+describe("partTwo", () => {
+  test("input-example correct answer", () => {
+    expect(partTwo(FILES.example)).toStrictEqual(4);
+  });
+  test("input-actual correct answer", () => {
+    expect(partTwo(FILES.actual)).toStrictEqual(843);
+  });
+});
