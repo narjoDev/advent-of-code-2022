@@ -19,10 +19,10 @@ describe("partOne", () => {
 });
 
 describe("partTwo", () => {
-  // test("input-example correct answer", () => {
-  //   expect(partTwo(FILES.example)).toStrictEqual(null);
-  // });
-  // test("input-actual correct answer", () => {
-  //   expect(partTwo(FILES.actual)).toStrictEqual(null);
-  // })
+  test("input-example correct answer", () => {
+    expect(partTwo(FILES.example)).toStrictEqual("MCD");
+  });
+  test("input-actual correct answer", () => {
+    expect(partTwo(FILES.actual)).toStrictEqual("FSZWBPTBG");
+  });
 });

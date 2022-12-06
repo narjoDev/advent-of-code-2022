@@ -54,6 +54,19 @@ function executeStep(step, crateMap) {
   }
 }
 
+function executePartTwoStep(step, crateMap) {
+  const [numberToMove, origin, destination] = step
+    .match(/\d+/g)
+    .map((x) => parseInt(x));
+  const temp = [];
+  for (let i = 0; i < numberToMove; i++) {
+    temp.push(crateMap[origin - 1].pop());
+  }
+  while (temp.length) {
+    crateMap[destination - 1].push(temp.pop());
+  }
+}
+
 function getTopCrates(crateMap) {
   let topCrates = "";
   crateMap.forEach((stack) => {
@@ -70,13 +83,16 @@ function partOne(file) {
 }
 
 function partTwo(file) {
-  return;
+  const [drawing, procedure] = splitInput(file);
+  let crateMap = parseDrawing(drawing);
+  procedure.forEach((step) => executePartTwoStep(step, crateMap));
+  return getTopCrates(crateMap);
 }
 
-console.log(partOne(FILES.example)); // CMZ
-console.log(partOne(FILES.actual)); // CFFHVVHNC
+// console.log(partOne(FILES.example)); // CMZ
+// console.log(partOne(FILES.actual)); // CFFHVVHNC
 
-// console.log(partTwo(FILES.example));
-// console.log(partTwo(FILES.actual));
+console.log(partTwo(FILES.example)); // MCD
+console.log(partTwo(FILES.actual)); // FSZWBPTBG
 
 module.exports = { FILES, partOne, partTwo };
