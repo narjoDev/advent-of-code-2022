@@ -13,9 +13,9 @@ describe("partOne", () => {
   test("input-example correct answer", () => {
     expect(partOne(FILES.example)).toStrictEqual("CMZ");
   });
-  // test("input-actual correct answer", () => {
-  //   expect(partOne(FILES.actual)).toStrictEqual(null);
-  // })
+  test("input-actual correct answer", () => {
+    expect(partOne(FILES.actual)).toStrictEqual("CFFHVVHNC");
+  });
 });
 
 describe("partTwo", () => {

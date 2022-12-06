@@ -26,40 +26,29 @@ function splitInput(file) {
   return [drawing, procedure];
 }
 
-/**
- *
- * @param {array[string]} drawing
- * @returns {array[array[string]]} 2D array of crates in each stack: [[A,B],[Z]]
- * Please note that index i represents stack i+1
- */
 function parseDrawing(drawing) {
-  // TODO:
-  console.log(drawing[2]);
+  const numberOfStacks = parseInt(
+    drawing[drawing.length - 1].match(/(\d)\D*$/)[1]
+  );
+  const height = drawing.length - 1;
   const crateMap = [];
-  const numberOfStacks =
-    drawing[drawing.length - 1].split(" ")[drawing.length - 1];
-  console.log(numberOfStacks);
-  for (let stackNumber = 0; stackNumber < numberOfStacks; stackNumber++) {
-    crateMap.push([]); // initialize stack
+  for (let stackNumber = 1; stackNumber <= numberOfStacks; stackNumber++) {
+    const stack = [];
     const column = (stackNumber - 1) * 4 + 1;
-    // add all crates in stack
-    for (let i = drawing.length - 2; i >= 0; i--) {
+    for (let i = height - 1; i >= 0; i--) {
       const crate = drawing[i][column];
-      const regex = new RegExp("[a-zA-Z]");
-      if (!regex.test(crate)) {
-        break;
-      } // done with stack
-      else {
-        crateMap[stackNumber - 1].push(crate);
-      }
+      if (!/[a-zA-Z]/.test(crate)) break;
+      stack.push(crate);
     }
+    crateMap.push(stack);
   }
-  console.log(crateMap);
   return crateMap;
 }
 
 function executeStep(step, crateMap) {
-  const [numberToMove, origin, destination] = step.match(/\d+/g);
+  const [numberToMove, origin, destination] = step
+    .match(/\d+/g)
+    .map((x) => parseInt(x));
   for (let i = 0; i < numberToMove; i++) {
     crateMap[destination - 1].push(crateMap[origin - 1].pop());
   }
@@ -67,13 +56,14 @@ function executeStep(step, crateMap) {
 
 function getTopCrates(crateMap) {
   let topCrates = "";
-  crateMap.forEach((stack) => topCrates.concat("", stack.at(-1)));
+  crateMap.forEach((stack) => {
+    topCrates = topCrates.concat("", [...stack].pop());
+  });
   return topCrates;
 }
 
 function partOne(file) {
   const [drawing, procedure] = splitInput(file);
-  console.log(drawing, procedure);
   let crateMap = parseDrawing(drawing);
   procedure.forEach((step) => executeStep(step, crateMap));
   return getTopCrates(crateMap);
@@ -83,8 +73,8 @@ function partTwo(file) {
   return;
 }
 
-console.log(partOne(FILES.example));
-// console.log(partOne(FILES.actual));
+console.log(partOne(FILES.example)); // CMZ
+console.log(partOne(FILES.actual)); // CFFHVVHNC
 
 // console.log(partTwo(FILES.example));
 // console.log(partTwo(FILES.actual));
